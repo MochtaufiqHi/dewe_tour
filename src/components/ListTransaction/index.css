@@ -1,0 +1,20 @@
+.text-colom-h, .text-colom{
+  /* color: pink; */
+  /* background-color: green; */
+  /* align-items: center; */
+  /* justify-items: center; */
+  /* justify-content: center; */
+  /* text-align: center; */
+  margin: 10px 0px 10px;
+  font-size: 14px;
+}
+.text-colom-h{
+  font-weight: 700;
+}
+.text-colom{
+  font-weight: 400;
+}
+.content-table{
+  border-bottom: 1px solid black !important;
+  /* background-color: blue !important; */
+}

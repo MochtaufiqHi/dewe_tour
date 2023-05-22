@@ -1,0 +1,17 @@
+.cnt-card{
+  padding-top: 360px;
+  padding-left: 40px;
+  flex-wrap: wrap;
+}
+.card-img-top{
+ margin: 14px auto; 
+}
+.card-title{
+  font-weight: 800;
+  padding: 10px;
+}
+.card-text{
+  font-weight: 400;
+  color: #878787;
+  padding: 10px;
+}

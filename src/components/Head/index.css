@@ -1,0 +1,14 @@
+.hero {
+  position: absolute;
+}
+.hero-content{
+  margin-top: 70px;
+}
+.explore-text{
+  font-weight: 700;
+  color: white;
+}
+.explore-text-content{
+  font-weight: 300;
+  color: white;
+}

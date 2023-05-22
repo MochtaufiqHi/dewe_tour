@@ -1,0 +1,23 @@
+.nav-back{
+  background: url('../../assets/hero.png');
+  background-size: cover;
+  /* background: none; */
+  background-color: transparent;
+  /* margin-top: 80px; */
+  /* position: absolute; */
+  z-index: 10;
+  /* object-position: inherit; */
+  /* background: transparent; */
+  /* background: pink ; */
+  /* object-fit: fill; */
+  /* filter: brightness(0.80); */
+}
+.register{
+  background-color: orange;
+  width: 100px;
+  color: white;
+  /* height: 30px; */
+}
+.login{
+  width: 100px;
+}

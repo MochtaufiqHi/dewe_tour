@@ -14,7 +14,7 @@ function ModalListTransaction(props) {
 
   return (
     <>
-      <Modal show={props.modal} onHide={props.hideModal} animation={false} size='lg' style={{top:"0px", height:"600px"}}>
+      <Modal show={props.modal} onHide={props.hideModal} animation={false} size='lg' style={{top:"60px", height:"900px"}}>
         {/* <Modal.Header closeButton /> */}
         <Modal.Body className=''>
           <div className="px-1"> 

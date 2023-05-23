@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 function DropdownAdmin() {
   return (
-    <Dropdown style={{backgroundColor:"blue"}}>
+    <Dropdown style={{backgroundColor:""}}>
 
       <Dropdown.Toggle variant="" id="dropdown-basic" style={{border:"none", height:"74px"}}>
         <div className="mt-1">

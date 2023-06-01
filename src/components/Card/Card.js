@@ -1,9 +1,9 @@
 import './index.css'
 
-import logo1 from '../../assets/perfomence1.png'
-import logo2 from '../../assets/perfomence2.png'
-import logo3 from '../../assets/perfomence3.png'
-import logo4 from '../../assets/perfomence4.png'
+import logo1 from '../../assets/img/perfomence1.png'
+import logo2 from '../../assets/img/perfomence2.png'
+import logo3 from '../../assets/img/perfomence3.png'
+import logo4 from '../../assets/img/perfomence4.png'
 
   const dataPerformence = [
   {

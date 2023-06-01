@@ -1,5 +1,5 @@
 import Carousel from 'react-bootstrap/Carousel';
-import img from '../../assets/hero1.png'
+import img from '../../assets/img/hero1.png'
 
 function CorouselImg() {
   return (

@@ -1,9 +1,10 @@
-import hotel from '../../assets/it1.png'
-import plane from '../../assets/it3.png'
-import eat from '../../assets/it5.png'
-import time from '../../assets/it4.png'
-import date from '../../assets/it2.png'
+import hotel from '../../assets/img/it1.png'
+import plane from '../../assets/img/it3.png'
+import eat from '../../assets/img/it5.png'
+import time from '../../assets/img/it4.png'
+import date from '../../assets/img/it2.png'
 import { trip } from '../../data'
+import './index.css'
 
 // console.log(trip)
 
@@ -11,18 +12,17 @@ function InformationTrip({ payment }) {
   return(
     <>
       <div className="container mt-5">
-        <p className='mb-3' style={{fontWeight:"900", fontSize:"18px"}}>Information Trip</p>
+        <p className='mb-3 information-trip'>Information Trip</p>
         <div className='d-flex w-100 justify-content-center'>
-          {/* {itemTrip.map((data) => ( */}
-          <div style={{width:"250px"}}>
+          <div className='blank-trip'>
             <div>
-              <p className='mb-0' style={{fontWeight:"800", fontSize:"13px", color:"#a8a8a8"}}>Acomodation</p>
+              <p className='mb-0 item-service'>Acomodation</p>
               <div className='d-flex mt-1'>
                 <div>
-                  <img src={hotel} style={{objectFit:"contain"}} alt="..."/>
+                  <img src={hotel} className='icon-service' alt="..."/>
                 </div>
                 <div className='px-3'>
-                  <p style={{fontWeight:"800", fontSize:"13px"}}>{trip[0].acomodation}</p>
+                  <p clasName='service'>{trip[0].acomodation}</p>
                 </div>
               </div>
             </div>
@@ -30,13 +30,13 @@ function InformationTrip({ payment }) {
 
           <div style={{width:"250px"}}>
             <div>
-              <p className='mb-0' style={{fontWeight:"800", fontSize:"13px", color:"#a8a8a8"}}>Transportation</p>
+              <p className='mb-0 item-service'>Transportation</p>
               <div className='d-flex mt-1'>
                 <div>
-                  <img src={plane} style={{objectFit:"contain"}} alt="..."/>
+                  <img src={plane} className='icon-service' alt="..."/>
                 </div>
                 <div className='px-3'>
-                  <p style={{fontWeight:"800", fontSize:"13px"}}>{trip[0].transportation}</p>
+                  <p clasName='service'>{trip[0].transportation}</p>
                 </div>
               </div>
             </div>
@@ -44,13 +44,13 @@ function InformationTrip({ payment }) {
 
           <div style={{width:"250px"}}>
             <div>
-              <p className='mb-0' style={{fontWeight:"800", fontSize:"13px", color:"#a8a8a8"}}>Eat</p>
+              <p className='mb-0 item-service'>Eat</p>
               <div className='d-flex mt-1'>
                 <div>
-                  <img src={eat} style={{objectFit:"contain"}} alt="..."/>
+                  <img src={eat} className='icon-service' alt="..."/>
                 </div>
                 <div className='px-3'>
-                  <p style={{fontWeight:"800", fontSize:"13px"}}>{trip[0].eat}</p>
+                  <p clasName='service'>{trip[0].eat}</p>
                 </div>
               </div>
             </div>
@@ -58,13 +58,13 @@ function InformationTrip({ payment }) {
 
           <div style={{width:"250px"}}>
             <div>
-              <p className='mb-0' style={{fontWeight:"800", fontSize:"13px", color:"#a8a8a8"}}>Duration</p>
+              <p className='mb-0 item-service'>Duration</p>
               <div className='d-flex mt-1'>
                 <div>
-                  <img src={time} style={{objectFit:"contain"}} alt="..."/>
+                  <img src={time} className='icon-service' alt="..."/>
                 </div>
                 <div className='px-3'>
-                  <p style={{fontWeight:"800", fontSize:"13px"}}>{trip[0].duration.day} Day {trip[0].duration.night} Night</p>
+                  <p clasName='service'>{trip[0].duration.day} Day {trip[0].duration.night} Night</p>
                 </div>
               </div>
             </div>
@@ -72,13 +72,13 @@ function InformationTrip({ payment }) {
 
           <div style={{width:"250px"}}>
             <div>
-              <p className='mb-0' style={{fontWeight:"800", fontSize:"13px", color:"#a8a8a8"}}>Date Trip</p>
+              <p className='mb-0 item-service'>Date Trip</p>
               <div className='d-flex mt-1'>
                 <div>
-                  <img src={date} style={{objectFit:"contain"}} alt="..."/>
+                  <img src={date} className='icon-service' alt="..."/>
                 </div>
                 <div className='px-3'>
-                  <p style={{fontWeight:"800", fontSize:"13px"}}>Data dummy</p>
+                  <p clasName='service'>Data dummy</p>
                 </div>
               </div>
             </div>

@@ -1,0 +1,19 @@
+.information-trip{
+  font-weight: 900;
+  font-size: 18px;
+}
+.blank-trip{
+  width: 250px;
+}
+.items-service{
+  font-weight: 800;
+  font-size: 13px;
+  color: #a8a8a8;
+}
+.service{
+  font-weight: 800;
+  font-size: 13px;
+}
+.icon-service{
+  object-fit: contain;
+}

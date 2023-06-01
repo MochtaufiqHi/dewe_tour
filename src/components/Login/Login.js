@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react';
-// import * as ReactDOM from 'react-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-// import DropdownProfile from '../Dropdown/Dropdown';
+import "./index.css"
 
-import palm from '../../assets/palm.png'
-import hibicus from '../../assets/hibiscus.png'
+import palm from '../../assets/img/palm.png'
+import hibicus from '../../assets/img/hibiscus.png'
+import { useNavigate } from 'react-router-dom';
 
 function FormLogin(props) {
-  const [data, setData] = useState({
+  // state
+  const [data, setData] = useState([{
     isAdmin: false,
     isLogin: false,
     user: {
       email: '',
       password: '',
     }
-  })
+  }])
 
   function handleOnChange(e) {
     setData({
@@ -26,14 +27,13 @@ function FormLogin(props) {
         }
     })
   }
+  const Navi = useNavigate()
 
   function handleOnSubmit(e) {
     e.preventDefault()
     const email = document.getElementById("email").value
     const password = document.getElementById("password").value
 
-    // console.log(email)
-    // console.log(password)
 
     if(email === "user@gmail.com" && password === "123") {
       setData({
@@ -44,6 +44,7 @@ function FormLogin(props) {
           password: password,
         }
       })
+      window.location.reload()
     } else if(email === "admin@gmail.com" && password === "123") {
       setData({
         isAdmin: true,
@@ -53,6 +54,9 @@ function FormLogin(props) {
           password: password,
         }
       }) 
+      // window.location.reload('/transaction')
+      Navi('/transaction')
+      window.location.reload()
     } else {
       setData({
         isAdmin: false,
@@ -63,14 +67,16 @@ function FormLogin(props) {
   }
 
   useEffect(() => {
-    props.setIsLogin(data.isLogin)
-    props.setIsAdmin(data.isAdmin)
+    if(data.isAdmin || data.isLogin){
+      localStorage.setItem('data', JSON.stringify(data))
+    } 
+
+    // props.setIsLogin(data.isLogin)
+    // props.setIsAdmin(data.isAdmin)
   },[data])
 
   const wrapperFunction = () => {
     props.handleClose()
-    // setLogin()
-
   }
 
   console.log(data.isLogin)
@@ -79,57 +85,43 @@ function FormLogin(props) {
   return (
     <>
       <Modal show={props.show} onHide={props.handleClose} style={{}} className="d-relative">
-        {/* <Modal.Header> */}
-        {/* <Modal.Header style={{width:"400px"}}> */}
-        {/* </Modal.Header> */}
-        <Modal.Title style={{margin:"51px auto"}}>Login</Modal.Title>
-        <Modal.Body style={{alignItems:"center", marginLeft:"20px"}}>
+        <Modal.Title className='modal-tittle'>Login</Modal.Title>
+        <Modal.Body className='modal-body'>
           <Form onSubmit={handleOnSubmit}>
             <Form.Group className="mb-3">
-            {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1"> */}
-              <Form.Label style={{margin:"2px 40px"}}>Email</Form.Label>
-              {/* <button onClick={()=> setLogin(10000)}>coba</button> */}
+              <Form.Label className='modal-label'>Email</Form.Label>
               <Form.Control
-                style={{margin:"2px 40px", width:"350px"}}
+                className='modal-control'
                 id="email"
                 type="email"
                 autoFocus
                 onChange={handleOnChange}
-                // value={data.email}
-                // onChange={(e) =>{setData({...data, user:{email: e.target.value}})}}
               />
             </Form.Group>
             <Form.Group
               className="mb-3"
             >
-              <Form.Label style={{margin:"2px 40px"}}>Password</Form.Label>
+              <Form.Label className='modal-label'>Password</Form.Label>
               <Form.Control 
-                style={{margin:"2px 40px", width:"350px"}}
+                className='modal-control'
                 id="password"
                 type="password"
                 rows={3} 
                 onChange={handleOnChange}
-                // value={data.password}
-                // onChange={(e)=>{setData({...data, user:{password: e.target.value}})}}
               />
             </Form.Group>
-            {/* <Modal.Footer> */}
-              {/* <Button className="w-100" style={{backgroundColor:"orange", border:"none", color:"white"}} type="submit" onClick={() => {setLogin(); handleClose();}}>
-               */}
-              <Button className="" style={{backgroundColor:"orange", border:"none", color:"white", margin:"2px 40px", width:"350px"}} type="submit" onClick={wrapperFunction}> 
+              <Button className="modal-btn" type="submit" onClick={wrapperFunction}> 
                 Login
               </Button>
-              {/* <Button variant="primary" onClick={props.handleClose}>
-                Save Changes
+              {/* <Button className="modal-btn"  onClick={() => Navi('/transaction')}> 
+                test
               </Button> */}
-            {/* </Modal.Footer> */}
           </Form>
-          <Form.Label className='m-5 text-center' style={{paddingLeft:"40px"}}>Don't have an account? ? <span>Click Here</span></Form.Label>
+          <Form.Label className='m-5 text-center modal-click' >Don't have an account? ? <span>Click Here</span></Form.Label>
         </Modal.Body>
-          <img src={palm} alt="..." style={{position:"absolute"}}/>
-          <img src={hibicus} alt="..." style={{position:"absolute", right:"0px"}}/>
+          <img src={palm} alt="..." className='modal-img'/>
+          <img src={hibicus} alt="..." className='modal-img-hibi'/>
       </Modal>
-      {/* <DropdownProfile isLogin={data.isLogin} setIsLoginFromChild={setIsLoginFromChild}/> */}
     </>
   );
 }

@@ -1,0 +1,68 @@
+.table-head{
+  font-weight: 800;
+  font-size: 18px;
+}
+.data-table-user{
+  color: #b1b1b1;
+}
+
+.data-table-set, .data-table-user{
+  font-size: 18px;
+  font-weight: 400;
+}
+.data-table-total, .data-table-total-p{
+  font-weight: 800;
+  font-size: 18px;
+}
+.data-table-total-p{
+  color: red;
+}
+.logo{
+  object-fit: contain;
+}
+.div-date{
+  text-align: end;
+}
+.div-p1{
+  font-weight: 800;
+  font-size: 36px;
+}
+.div-p2{
+  font-weight: 300;
+  font-size: 18px;
+  color: #878787;
+}
+.div-tittle{
+  font-weight: 900;
+  font-size: 24px;
+  margin-left: 32px;
+}
+.country{
+  font-weight: 400;
+  font-size: 14px;
+  color: #959595;
+  margin-left: 32px;
+}
+.waiting{
+  font-weight: 500;
+  font-size: 12px;
+  color: #ff9900;
+  margin-left: 32px;
+}
+.info-trip{
+  font-weight: 800;
+  font-size: 18px;
+  margin-bottom: 0px;
+}
+.item-trip{
+  font-size: 14px;
+  font-weight: 400;
+  color: #959595;
+}
+.coloum-div{
+  width: 33%;
+}
+.img-resi{
+  width: 180px;
+  margin-right: 40px;
+}

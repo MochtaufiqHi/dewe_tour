@@ -2,8 +2,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-import palm from '../../assets/palm.png'
-import hibicus from '../../assets/hibiscus.png'
+import palm from '../../assets/img/palm.png'
+import hibicus from '../../assets/img/hibiscus.png'
 
 
 function FormRegister({show, handleRegClose}) {

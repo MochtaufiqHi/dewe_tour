@@ -1,8 +1,8 @@
-import contact from '../../assets/contact.png'
-import mail from '../../assets/mail.png'
-import phone from '../../assets/phone.png'
-import map from '../../assets/map.png'
-import profile from '../../assets/profile.png'
+import contact from '../../assets/img/contact.png'
+import mail from '../../assets/img/mail.png'
+import phone from '../../assets/img/phone.png'
+import map from '../../assets/img/map.png'
+import profile from '../../assets/img/profile.png'
 
 function ProfileInfo() {
   return(

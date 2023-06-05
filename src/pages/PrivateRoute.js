@@ -1,14 +1,33 @@
-// import { Component } from "react";
-import { Outlet, Navigate } from "react-router-dom";
+import { useContext } from "react";
+import { Outlet } from "react-router-dom";
+import { UserContext } from "../context/useContext";
+import { Navigate } from "react-router-dom";
 
-const PrivateRoute = ({data}) => {
-  if(!data) {
-    return <Navigate to="/" replace/>
+export function PrivateRouteLogin() {
+  const [state] = useContext(UserContext);
+
+  if (!state.isLogin) {
+    return <Navigate to="/" />
   }
-
-  return <Outlet/>
-
-  // return isLogin ? <Outlet /> : <Navigate to="/" />
+  return <Outlet />
 }
 
-export default PrivateRoute
+export function PrivateRouteUser() {
+  const [state] = useContext(UserContext);
+
+  if (state.user.role === "admin") {
+    return <Navigate to="/transaction" />
+  }
+
+  return <Outlet />
+}
+
+export function PrivateRouteAdmin() {
+  const [state] = useContext(UserContext);
+
+  if (state.user.role !== "admin") {
+    return <Navigate to="/" />
+  }
+
+  return <Outlet />
+}

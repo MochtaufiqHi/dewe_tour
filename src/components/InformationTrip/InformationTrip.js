@@ -5,10 +5,23 @@ import time from '../../assets/img/it4.png'
 import date from '../../assets/img/it2.png'
 import { trip } from '../../data'
 import './index.css'
+import { useParams } from 'react-router-dom'
+import { API } from "../../config/api"
+import { useQuery } from "react-query"
 
 // console.log(trip)
 
 function InformationTrip({ payment }) {
+
+  let { id } = useParams()
+
+  let { data: trip } = useQuery('tripCache', async () => {
+    const response = await API.get('/trip/' + id + 1);
+    return response?.data?.data;
+  });
+
+  console.log(trip)
+
   return(
     <>
       <div className="container mt-5">
@@ -22,7 +35,7 @@ function InformationTrip({ payment }) {
                   <img src={hotel} className='icon-service' alt="..."/>
                 </div>
                 <div className='px-3'>
-                  <p clasName='service'>{trip[0].acomodation}</p>
+                  <p clasName='service'>{trip?.acommodation}</p>
                 </div>
               </div>
             </div>
@@ -36,7 +49,7 @@ function InformationTrip({ payment }) {
                   <img src={plane} className='icon-service' alt="..."/>
                 </div>
                 <div className='px-3'>
-                  <p clasName='service'>{trip[0].transportation}</p>
+                  <p clasName='service'>{trip?.transportation}</p>
                 </div>
               </div>
             </div>
@@ -50,7 +63,7 @@ function InformationTrip({ payment }) {
                   <img src={eat} className='icon-service' alt="..."/>
                 </div>
                 <div className='px-3'>
-                  <p clasName='service'>{trip[0].eat}</p>
+                  <p clasName='service'>{trip?.eat}</p>
                 </div>
               </div>
             </div>
@@ -64,7 +77,7 @@ function InformationTrip({ payment }) {
                   <img src={time} className='icon-service' alt="..."/>
                 </div>
                 <div className='px-3'>
-                  <p clasName='service'>{trip[0].duration.day} Day {trip[0].duration.night} Night</p>
+                  <p clasName='service'>{trip?.day} Day {trip?.night} Night</p>
                 </div>
               </div>
             </div>
@@ -78,7 +91,7 @@ function InformationTrip({ payment }) {
                   <img src={date} className='icon-service' alt="..."/>
                 </div>
                 <div className='px-3'>
-                  <p clasName='service'>Data dummy</p>
+                  <p clasName='service'>{trip?.dateTrip}</p>
                 </div>
               </div>
             </div>
@@ -86,6 +99,10 @@ function InformationTrip({ payment }) {
           {/* ))} */}
         </div>
       </div>
+      <div className="container">
+          <p style={{fontWeight:"800", fontSize:"18px", marginTop:"26px", marginBottom:"8px"}}>Description</p>
+          <p style={{fontWeight:"400", fontSize:"14px", color:"#a8a8a8", textAlign:"justify"}}>{trip?.description}</p>
+        </div>
     </>
   )
 }

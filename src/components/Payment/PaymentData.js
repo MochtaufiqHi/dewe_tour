@@ -1,9 +1,13 @@
 import Table from "react-bootstrap/Table"
 import "./index.css"
+import { useContext } from "react";
+import { UserContext } from "../../context/useContext";
 
-function PaymentData({ payment }) {
+// const data = JSON.parse(localStorage.getItem("user"))
+
+function PaymentData() {
+  const [data] = useContext(UserContext);
   // console.log(totalPrice)
-  console.log(payment)
   return(
     <div className="mt-0">
       <Table>
@@ -25,12 +29,12 @@ function PaymentData({ payment }) {
           <td></td>
           <td></td>
           <td><p className="data-table-user">1</p></td>
-          <td><p className="data-table-user">Taufiq Hidayat</p></td>
+          <td><p className="data-table-user">{data.user.name}</p></td>
           <td><p className="data-table-user">Male</p></td>
-          <td><p className="data-table-user">0987878855</p></td>
+          <td><p className="data-table-user">{data.user.phone}</p></td>
           <td><p className="data-table-set">Qty</p></td>
           <td><p className="data-table-set">:</p></td>
-          <td><p className="data-table-set">1</p></td>
+          <td><p className="data-table-set">{data && data[0]?.quantity}</p></td>
         </tr>
         <tr>
           <td></td>
@@ -41,7 +45,7 @@ function PaymentData({ payment }) {
           <td></td>
           <td><p className="data-table-total">Total</p></td>
           <td><p className="data-table-total">:</p></td>
-          <td><p className="data-table-total-p">IDR. {payment}</p></td>
+          <td><p className="data-table-total-p">IDR. {data && data[0]?.price}</p></td>
         </tr>
       </tbody>
     </Table>

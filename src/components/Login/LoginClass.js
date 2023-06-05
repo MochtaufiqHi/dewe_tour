@@ -17,7 +17,7 @@ class FormLoginp extends Component {
   }
 
   handleSubmit(e) {
-    alert('A named was submitted' + this.state.value)
+    // alert('A named was submitted' + this.state.value)
     e.preventDefault()
   }
 

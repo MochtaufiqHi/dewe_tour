@@ -3,11 +3,25 @@ import elip from '../../assets/img/Ellipse.png'
 import user from '../../assets/img/user.png'
 import pay from '../../assets/img/bill.png'
 import logout from '../../assets/img/logout.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from 'react'
+import { UserContext } from '../../context/useContext'
 
 
 
 function DropdownProfile(props) {
+  let navigate = useNavigate()
+  const [_, dispatch] = useContext(UserContext)
+
+  const logoutUser = () => {
+    dispatch({
+      type: 'LOGOUT'
+    })
+    navigate("/")
+    window.location.reload()
+  } 
+
+
   return (
     <Dropdown style={{}}>
 
@@ -42,15 +56,15 @@ function DropdownProfile(props) {
           <div className='d-flex border-bottom border-1 border-dark'>
             <Link>
               <button onClick={(() => {
-                localStorage.removeItem('data')
-                window.location.reload()
+                // localStorage.removeItem('data')
+                // window.location.reload()
               })}>
               {/* <Link to='/'> */}
                 <img src={logout} alt="logout" style={{objectFit:"contain"}}/>
               {/* </Link>   */}
               </button>
             </Link>
-            <Link>
+            <Link onClick={logoutUser}>
               <p className='mx-3 mt-2 text-dark'>Logout</p>
             </Link>
           </div>

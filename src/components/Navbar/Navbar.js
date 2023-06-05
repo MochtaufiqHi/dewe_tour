@@ -3,17 +3,23 @@ import './index.css';
 import { Link } from 'react-router-dom'
 import logo from '../../assets/img/Icon.png'
 import FormLogin from '../Login/Login'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import FormRegister from '../Register/Register';
 import DropdownProfile from '../Dropdown/Dropdown';
 import DropdownAdmin from '../Dropdown/DropdownAdmin';
+import { UserContext } from '../../context/useContext';
+// import { useNavigate } from 'react-router-dom';
+// import { API, setAuthToken } from '../../config/api';
+// import jwtDecode from 'jwt-decode';
 
 const login = JSON.parse(localStorage.getItem('data'))
 
 
 function Navigation() {
-  console.log(login);
-  console.log(login?.isLogin)
+  const [state, dispatch] = useContext(UserContext)
+  var user = state.role
+  var login = state.isLogin
+  
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -42,10 +48,10 @@ function Navigation() {
             <img src={logo} alt="logo"/>
           </Link>
           <nav className="d-flex" role="search">
-            {login?.isLogin ? 
+            {login && user === "user" ? 
               <div>
                 <DropdownProfile />
-              </div> : login?.isAdmin ? <DropdownAdmin /> :
+              </div> : login && user === "admin" ? <DropdownAdmin /> :
               <div>
                 <button className="btn btn-outline-light mx-2 login" type="submit" onClick={handleShow}>Login</button><button className="btn register" type="submit" onClick={handleRegShow}>Register</button>
               </div>

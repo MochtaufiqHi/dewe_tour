@@ -1,5 +1,5 @@
-import {BrowserRouter as Router, Routes, Route, useParams, redirect, Outlet, Navigate} from 'react-router-dom'
-import { useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
+import { useState, useEffect, useContext } from 'react'
 
 import './App.css'
 
@@ -13,61 +13,94 @@ import Navigation from './components/Navbar/Navbar'
 import IncomeTrip from './pages/IncomeTrip'
 import WaitingPayment from './pages/WaitingPayment'
 // import PrivateRoute from './pages/PrivateRoute'
-
-const login = JSON.parse(localStorage.getItem('data'))
-
-const JamesBond077 = ({ isUser, redirectPath = '/' }) => {
-  if(!isUser) {
-    return <Navigate to={redirectPath} replace />
-  }
-  return <Outlet />
-}
-
+import Auth from './pages/Auth'
+import { API, setAuthToken } from './config/api'
+import { useNavigate } from 'react-router-dom'
+import { PrivateRouteAdmin, PrivateRouteLogin, PrivateRouteUser } from './pages/PrivateRoute'
+import { UserContext } from './context/useContext'
+import AddCountry from './pages/AddCountry'
 
 function App() {
-  const [payment, setPayment] = useState()
+  let navigate = useNavigate()
+  const [state, dispatch] = useContext(UserContext)
+  const [isLoading, setIsLoading] = useState(true)
 
-  const handlePayment = (e) => {
-    setPayment(e)
+  console.log(state)
+
+  useEffect(() => {
+    if (!isLoading) {
+      if (state.isLogin === false) {
+        navigate('/')
+      }
+    }
+  }, [isLoading])
+
+  useEffect(() => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token)
+      checkUser()
+    } else {
+      setIsLoading(false)
+    }
+  }, [])
+
+  const checkUser = async () => {
+    try {
+      const response = await API.get("/check-auth")
+      console.log("check user success : ", response)
+
+      let payload = response.data.data
+
+      payload.token = localStorage.token
+
+      dispatch({
+        type: 'USER_SUCCESS',
+        payload,
+      })
+    } catch (error) {
+      console.log("check user failed : ", error)
+      dispatch({
+        type: 'AUTH_ERROR',
+      })
+      setIsLoading(false)
+    }
   }
-  
-  console.log(payment)
-  
-  const [dataUser, setDataUser] = useState({
-    user: false,
-    admin: false,
-  })
 
-  return (
+  return isLoading ? null: (
     <>
-      <Router>
-        <div className='home-pages'>
-          <Navigation />
-          <div className=''>
-            <Routes>
-
-              <Route exact path='/' element={<Home/>} />
-              <Route exact path='/detail/:id' element={<Detail handlePayment={handlePayment} />} />
-               
-                <Route element={<JamesBond077 isUser={login?.isLogin}/>}>
-                  <Route exact path='/waiting-payment' element={<WaitingPayment />} />
-                  <Route exact path='/payment' element={<Payment  payment={payment}/>} />
-                  <Route exact path='/profile' element={<Profile />} />
-                </Route>
-
-                <Route element={<JamesBond077 isUser={login?.isAdmin}/>}>
-                  <Route exact path='/transaction' element={<Transaction />} />
-                  <Route exact path='/income-trip' element={<IncomeTrip />} />
-                  <Route exact path='/add-trip' element={<FormAddTrip />} />
-                </Route>
-
-            </Routes>
+          <div className='home-pages'>
+            <Navigation />
+            
+            <div className=''>
+              
+                <Routes>
+                  {/* <Route path='/auth' element={<Auth />} /> */}
+                  <Route exact path='/' element={<Home/>} />
+                  <Route exact path='/detail/:id' element={<Detail/>} />
+                  <Route element={<PrivateRouteLogin />}>
+                    <Route element={<PrivateRouteUser />}>
+                      <Route exact path='/add-country' element={<AddCountry />} />
+                      <Route exact path='/waiting-payment' element={<WaitingPayment />} />
+                      <Route exact path='/payment' element={<Payment />} />
+                      <Route exact path='/profile' element={<Profile />} />
+                    </Route>
+                  </Route>
+                    <Route element={<PrivateRouteAdmin />}>
+                      <Route exact path='/transaction' element={<Transaction />} />
+                      <Route exact path='/income-trip' element={<IncomeTrip />} />
+                      <Route exact path='/add-trip' element={<FormAddTrip />} />
+                    </Route>
+                </Routes>
+            </div>
           </div>
-        </div>
-        <div className="footer my-2">
-          <p className='footer-item'>Copyright @2020 Dewe Tour - Mochammad Taufiq Hidayat - NIS.All Rights reserved</p>  
-        </div>
-      </Router>
+          {/* <button onClick={checkUser} >
+              onclick
+            </button> */}
+          <div className="footer my-2">
+            <p className='footer-item'>Copyright @2020 Dewe Tour - Mochammad Taufiq Hidayat - NIS.All Rights reserved</p>  
+          </div>
+        {/* </Router> */}
+      {/* // } */}
     </>    
   );
 }

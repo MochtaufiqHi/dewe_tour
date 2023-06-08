@@ -11,14 +11,16 @@ import Transaction from './pages/Transaction'
 import FormAddTrip from './pages/FormAddTrip'
 import Navigation from './components/Navbar/Navbar'
 import IncomeTrip from './pages/IncomeTrip'
+import AddCountry from './pages/AddCountry'
 import WaitingPayment from './pages/WaitingPayment'
-// import PrivateRoute from './pages/PrivateRoute'
-import Auth from './pages/Auth'
 import { API, setAuthToken } from './config/api'
 import { useNavigate } from 'react-router-dom'
 import { PrivateRouteAdmin, PrivateRouteLogin, PrivateRouteUser } from './pages/PrivateRoute'
 import { UserContext } from './context/useContext'
-import AddCountry from './pages/AddCountry'
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token)
+}
 
 function App() {
   let navigate = useNavigate()
@@ -57,6 +59,7 @@ function App() {
         type: 'USER_SUCCESS',
         payload,
       })
+      setIsLoading(false)
     } catch (error) {
       console.log("check user failed : ", error)
       dispatch({
@@ -74,33 +77,28 @@ function App() {
             <div className=''>
               
                 <Routes>
-                  {/* <Route path='/auth' element={<Auth />} /> */}
                   <Route exact path='/' element={<Home/>} />
                   <Route exact path='/detail/:id' element={<Detail/>} />
                   <Route element={<PrivateRouteLogin />}>
                     <Route element={<PrivateRouteUser />}>
-                      <Route exact path='/add-country' element={<AddCountry />} />
-                      <Route exact path='/waiting-payment' element={<WaitingPayment />} />
-                      <Route exact path='/payment' element={<Payment />} />
-                      <Route exact path='/profile' element={<Profile />} />
+                      <Route path='/add-country' element={<AddCountry />} />
+                      <Route path='/waiting-payment' element={<WaitingPayment />} />
+                      <Route path='/payment' element={<Payment />} />
+                      <Route path='/profile' element={<Profile />} />
+                    </Route>
+                    <Route element={<PrivateRouteAdmin />}>
+                      <Route path='/transaction' element={<Transaction />} />
+                      <Route path='/income-trip' element={<IncomeTrip />} />
+                      <Route path='/add-trip' element={<FormAddTrip />} />
+                      <Route path='/add' element={<AddCountry />} />
                     </Route>
                   </Route>
-                    <Route element={<PrivateRouteAdmin />}>
-                      <Route exact path='/transaction' element={<Transaction />} />
-                      <Route exact path='/income-trip' element={<IncomeTrip />} />
-                      <Route exact path='/add-trip' element={<FormAddTrip />} />
-                    </Route>
                 </Routes>
             </div>
           </div>
-          {/* <button onClick={checkUser} >
-              onclick
-            </button> */}
           <div className="footer my-2">
             <p className='footer-item'>Copyright @2020 Dewe Tour - Mochammad Taufiq Hidayat - NIS.All Rights reserved</p>  
           </div>
-        {/* </Router> */}
-      {/* // } */}
     </>    
   );
 }

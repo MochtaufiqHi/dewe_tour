@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import "./index.css";
+import Swal from 'sweetalert2'
 import { Alert } from "react-bootstrap";
 
 import palm from "../../assets/img/palm.png";
@@ -61,9 +62,19 @@ function FormLogin(props) {
       } else {
         navigate("/");
       }
-      alert("Login Success")
+      Swal.fire(
+        'Loggin Succes!',
+        '',
+        'success',
+        '3000'
+      )
     } catch (error) {
-      alert("Incorrect Email or Password Please try Again")
+      Swal.fire(
+        'Loggin Failed!',
+        'Please check your email and password',
+        'error',
+        '3000'
+      )
       console.log("Login failed : ", error);
     }
   });

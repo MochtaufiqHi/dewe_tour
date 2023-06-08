@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import "../App.css";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { API } from "../config/api";
 import { useMutation } from "react-query";
@@ -77,11 +77,8 @@ function FormAddTrip() {
       formData.set("quota", form.quota);
       formData.set("description", form.description);
       formData.set("image", form.image[0], form.image[0].name);
-      // let country_id = form.country_id.map((country_id) => Number(country_id+1));
-      // formData.set("country_id", JSON.stringify(country_id));
       formData.set("country_id", form.country_id);
 
-      // insert trip data
       const response = await API.post("/trip", formData, config);
       console.log("add trip success :", response);
 
@@ -107,13 +104,13 @@ function FormAddTrip() {
         </Form.Group>
 
         <Form.Label>Country</Form.Label>
+        <div className="d-flex">
         <Form.Select
           aria-label="Default select example"
-          style={{ backgroundColor: "#b1b1b1" }}
+          style={{ backgroundColor: "#fff" }}
           name="country_id"
           onClick={handleChange}
         >
-          {/* <option>Select Country</option> */}
           {countries.map((item, index) => {
             return (
               <option
@@ -124,6 +121,19 @@ function FormAddTrip() {
             );
           })}
         </Form.Select>
+          <Link to="/add">
+            <Button 
+              className="mx-3" 
+              style={{
+                width: "250px",
+                backgroundColor: "orange",
+                border: "none",
+              }}>
+              Add Country
+            </Button>
+          </Link> 
+        </div>
+        
         <Form.Group className="mb-3">
           <Form.Label>Acomodation</Form.Label>
           <Form.Control
@@ -199,7 +209,7 @@ function FormAddTrip() {
             onChange={handleChange}
             as="textarea"
             rows={3}
-            style={{ backgroundColor: "#b1b1b1" }}
+            style={{ backgroundColor: "white" }}
           />
         </Form.Group>
 

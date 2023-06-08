@@ -1,12 +1,12 @@
 import ProfileInfo from '../components/Profile/ProfilInfo'
-import Payment from '../pages/Payment'
+import PaymentDate from '../components/Payment/PaymentDate'
 
 function Profile() {
   return(
     <>
       <div className="container">
         <ProfileInfo />
-        <Payment />
+        <PaymentDate />
       </div>
     </>
   )

@@ -35,7 +35,6 @@ export default function Auth() {
       <Container>
         <Row className="vh-100 d-flex align-items-center">
           <Col md="6">
-            {/* <img src="" className="img-fluid" style={{ width: "264px", height: "264px" }} alt="brand" /> */}
             <div className="text-auth-header mt-4">Easy, Fast and Reliable</div>
             <p className="text-auth-parag mt-3">
               Go shopping for merchandise, just go to dumb merch <br /> shopping. the biggest merchandise in{" "}

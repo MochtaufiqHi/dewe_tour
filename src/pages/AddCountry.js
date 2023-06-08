@@ -7,16 +7,11 @@ import { useNavigate } from "react-router-dom";
 
 function AddCountry() {
   let navigate = useNavigate();
-  const [form, setForm] = useState({
-    country: "",
-  })
+  const [form, setForm] = useState('')
 
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    })
-  }
+    setForm(e.target.value)
+  };
 
   const handleSubmit = useMutation(async (e) => {
     try {
@@ -24,35 +19,41 @@ function AddCountry() {
 
       const config = {
         headers: {
-          "Content-type": "multipart/form-data",
-          Authorization: `Bearer ${localStorage.token}`,
+          "Content-type": "application/json ",
+          "Authorization": `Bearer ${localStorage.token}`,
         },
       };
 
-      const formData = new FormData();
-      formData.set("name", form.country)
+      const body = JSON.stringify({ name: form });
 
-      const response = await API.post("/country", formData, config)
+      const response = await API.post("/country", body, config)
       console.log("add country success : ", response)
 
-      Navigate("/income-trip")
+      navigate("/income-trip")
     } catch (error) {
       console.log("add country failed : ", error)
     }
   })
 
+  console.log(form)
   return (
     <>
-      <div className='container p-5'>
+      <div className='container p-5' style={{height:"465px"}}>
         <Form onSubmit={(e) => handleSubmit.mutate(e)}>
           <Form.Label>Add Country</Form.Label>
           <Form.Control
             type="input"
-            name="country"
-            onClick={handleChange}
+            name="name"
+            onChange={handleChange}
           />
           <button 
-            className='my-4 rounded'
+            className='my-4 rounded p-2'
+            style={{
+              width: "250px",
+              backgroundColor: "orange",
+              border: "none",
+              color: "#fff",
+            }}
             type="submit">Add</button>
         </Form>
       </div>
@@ -60,4 +61,4 @@ function AddCountry() {
   )
 }
 
-export default AddCountry
+export default AddCountry;

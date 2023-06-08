@@ -4,6 +4,7 @@ import { API } from '../../config/api'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import Swal from 'sweetalert2'
 import {Alert} from 'react-bootstrap'
 
 import palm from '../../assets/img/palm.png'
@@ -21,14 +22,6 @@ function FormRegister({show, handleRegClose}) {
       phone: '',
       address: '',
   }])
-
-  // set config
-
-//  const config = {
-  //  headers: {
-    //  'Content-type': 'apllication/json'
-   // },
- // }
 
   function handleOnchange(e) {
     setForm({
@@ -54,9 +47,19 @@ function FormRegister({show, handleRegClose}) {
         phone: '',
         address: '',
       })
-      alert("Register success")
+      Swal.fire(
+        'Register Succes!',
+        '',
+        'success',
+        '3000'
+      )
     } catch (error) {
-      alert("Register Failed")
+      Swal.fire(
+        'Register Failed!',
+        'Please try again',
+        'error',
+        '3000'
+      )
       console.log("Register failed : ", error)
     }
   })
@@ -124,9 +127,9 @@ function FormRegister({show, handleRegClose}) {
               Register
             </Button>
           </Form>
-          <Button variant="secondary" onClick={handleRegClose} className="w-100 border border-none" style={{backgroundColor:"#ffaf00"}}>
+          {/* <Button variant="secondary" onClick={handleRegClose} className="w-100 border border-none" style={{backgroundColor:"#ffaf00"}}>
             Close
-          </Button>
+          </Button> */}
         </Modal.Body>
           <img src={palm} alt="..." style={{position:"absolute"}}/>
           <img src={hibicus} alt="..." style={{position:"absolute", right:"0px"}}/>

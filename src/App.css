@@ -1,7 +1,7 @@
 .home-pages{
   box-sizing: border-box;
   /* background-color: #e5e5e5; */
-  background-color: white;
+  background-color: rgb(230, 229, 229);
   /* background: url("./assets/hero.png") no-repeat; */
 }
 .footer{
@@ -20,7 +20,12 @@
 } */
 
 #mySwitch input, select, textarea{
-  background-color: #b1b1b1;
+  /* background-color: #b1b1b1; */
+  background-color: white;
+}
+
+#mySwitch select, textarea {
+  background-color: white;
 }
 
 #mySwitch label{
@@ -33,4 +38,16 @@
   position: absolute;
   width: 100%;
   top: 0;
+}
+
+.search{
+  position: absolute;
+  margin-top: 200px;
+  justify-content: center;
+  width:100%;
+}
+.label-form{
+  font-size: 18px;
+  font-weight: 400;
+  color: white;
 }

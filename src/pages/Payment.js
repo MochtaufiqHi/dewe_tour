@@ -8,12 +8,10 @@ function Payment() {
   return(
     <>
       <div className="container mt-5">
-        <div className="border border-dark rounded">
+        {/* <div className="border border-dark rounded"> */}
           <PaymentDate />
-          {/* <PaymentItem /> */}
-          {/* <PaymentData /> */}
-        </div>
-          <PaymentButton />
+        {/* </div> */}
+          {/* <PaymentButton /> */}
       </div>
     </>
   ) 

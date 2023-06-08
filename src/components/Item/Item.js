@@ -1,50 +1,37 @@
 import { Link } from "react-router-dom";
-import { trip } from "../../data";
 import "./index.css";
 
 import { useQuery } from "react-query";
 import { API } from "../../config/api";
+import { useState } from "react";
 
-function Item() {
+function Item(props) {
+  const [trip, setTrip] = useState()
+
   let { data: trips } = useQuery("tripsCache", async () => {
     const response = await API.get("/trip");
+    setTrip(response.data.data)
     return response.data.data;
   });
-
-  // console.log(trips)
-
+  // console.log(trips?.[0].country?.name);
+  console.log(props.search);
   return (
-    // <>
-    //   <div className='d-flex justify-content-center' style={{flexWrap:"wrap", flexShrink:"inherit"}}>
-    //     {trip.map((data, index) => (
-    //       <div className="card position-relative m-3" key={index}>
-    //         <p className="position-absolute pages end-0">{data?.quota}/20</p>
-    //         <img src={data?.img[0]} alt="Destination" style={{width:"320px", margin:"8px auto"}}></img>
-    //         <div className="card-body mx-2">
-    //           {/* <a href={`/detail/${index}`} style={{textDecorationLine:"none", color:"black"}}> */}
-    //           <Link to={`/detail/${index}`} style={{textDecorationLine:"none", color:"black"}}>
-    //             <h5 className="card-title my-3">{data.tittle}</h5>
-    //             {/* <h5 className="card-title my-3" onClick={() => props.goDetail(data.id)}>{data.tittle}</h5> */}
-    //           </Link>
-    //           {/* </a> */}
-    //           <div className="d-flex justify-content-between w-100">
-    //             <p className="price">IDR. {data.price.toLocaleString()}</p>
-    //             <p className="country">{data.country}</p>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     ))}
-    //   </div>
-    //  </>
-
     <>
       <div
         className="d-flex justify-content-center"
         style={{ flexWrap: "wrap", flexShrink: "inherit" }}
       >
-        {trips?.map((data, index) => (
-          <div className="card position-relative m-3">
-            <p className="position-absolute pages end-0">{data.quota}/20</p>
+        {trip?.filter((data) => {
+          if (props.search == "") {
+            return data
+          } else if (data?.country?.name?.toLowerCase().includes(props?.search?.toLowerCase())) {
+            return data
+          } else if (data?.title?.toLowerCase().includes(props?.search?.toLowerCase())) {
+            return data
+          }
+        }).map((data, index) => (
+          <div key={index} className="card position-relative m-3">
+            <p className="position-absolute pages end-0">{data.quota}</p>
             <img
               src={data?.image}
               alt="Destination"

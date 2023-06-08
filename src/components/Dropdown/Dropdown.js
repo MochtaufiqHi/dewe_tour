@@ -25,7 +25,7 @@ function DropdownProfile(props) {
   return (
     <Dropdown style={{}}>
 
-      <Dropdown.Toggle variant="" id="dropdown-basic" style={{border:"none", height:"74px"}}>
+      <Dropdown.Toggle variant="" id="dropdown-basic" style={{border:"none", height:"90px"}}>
         <div className="mt-1">
           <img src={elip} alt="..."/>
         </div>
@@ -33,39 +33,33 @@ function DropdownProfile(props) {
 
       <Dropdown.Menu className="" style={{top:"80px", left:"-80px"}}>
         <Dropdown.Item className='d-flex'>
-          <div className='d-flex border-bottom border-1 border-dark'>
-            <Link to="/profile">
+          <div className='d-flex'>
+            <Link to="/profile" >
               <img src={user} alt="user profile" style={{objectFit:"contain"}}/>
             </Link>
-            <Link to="/profile">
+            <Link to="/profile" className='text-decoration-none'>
               <p className='mx-3 mt-2 text-dark'>Profile</p>
             </Link>
           </div>
         </Dropdown.Item>
-        <Dropdown.Item  className='d-flex'>
-          <div className='d-flex border-bottom border-1 border-dark'>
+        {/* <Dropdown.Item  className='d-flex'>
+          <div className='d-flex'>
             <Link to="/payment">
               <img src={pay} alt="payment" style={{objectFit:"contain"}}/>
             </Link>
-            <Link to="/payment">
+            <Link to="/payment" className='text-decoration-none'>
               <p className='mx-3 mt-2 text-dark'>Pay</p>
             </Link>
           </div>
-        </Dropdown.Item>
+        </Dropdown.Item> */}
         <Dropdown.Item className='d-flex'>
-          <div className='d-flex border-bottom border-1 border-dark'>
-            <Link>
-              <button onClick={(() => {
-                // localStorage.removeItem('data')
-                // window.location.reload()
-              })}>
-              {/* <Link to='/'> */}
-                <img src={logout} alt="logout" style={{objectFit:"contain"}}/>
-              {/* </Link>   */}
-              </button>
-            </Link>
+          <div className='d-flex'>
             <Link onClick={logoutUser}>
-              <p className='mx-3 mt-2 text-dark'>Logout</p>
+                <img src={logout} alt="logout" style={{objectFit:"contain"}}/>
+            </Link>
+            <Link onClick={logoutUser} className='text-decoration-none'>
+              {/* Logout */}
+              <p className='mx-3 mt-2 text-dark text-decoration-none'>Logout</p>
             </Link>
           </div>
         </Dropdown.Item>

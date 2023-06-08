@@ -34,7 +34,7 @@ function DropdownAdmin() {
               <img src={journey} alt="income-trip" style={{objectFit:"contain"}}/>
             </Link>
             <Link to="/income-trip" className="text-decoration-none">
-              <p className='mx-3 mt-2 text-dark'>Pay</p>
+              <p className='mx-3 mt-2 text-dark'>Trip</p>
             </Link>
           </div>
         </Dropdown.Item>

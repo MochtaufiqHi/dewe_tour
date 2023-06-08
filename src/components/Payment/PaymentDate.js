@@ -1,12 +1,10 @@
 import imglogo from "../../assets/img/Icon2.png";
 import resi from "../../assets/img/resi.png";
 import Table from "react-bootstrap/Table";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../context/useContext";
 import { API } from "../../config/api";
 import { useQuery } from "react-query";
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 
 function PaymentDate() {
   const [state] = useContext(UserContext);
@@ -50,7 +48,7 @@ function PaymentDate() {
                   <div className="mt-4 coloum-div">
                     <p className="div-tittle">{data.trip.title}</p>
                     <p className="country">{data.trip.country.name}</p>
-                    <p className="waiting">{data.status}</p>
+                    <p className="waiting"><span style={{opacity:"100%", color:"#ff9900", marginLeft:"9px"}}>{data.status}</span></p>
                   </div>
                   <div
                     className="d-flex mt-4"
@@ -59,23 +57,23 @@ function PaymentDate() {
                     <div>
                       <div className="mb-5">
                         <p className="info-trip">Date Trip</p>
-                        <p className="item-trip">{data.trip.dateTrip}</p>
+                        <p className="item-trip mt-2">{data.trip.dateTrip}</p>
                       </div>
                       <div>
                         <p className="info-trip">Accomodation</p>
-                        <p className="item-trip">{data.trip.acommodation}</p>
+                        <p className="item-trip mt-2">{data.trip.acommodation}</p>
                       </div>
                     </div>
                     <div>
                       <div className="mb-5">
                         <p className="info-trip">Duration</p>
-                        <p className="item-trip">
+                        <p className="item-trip mt-2">
                           {data.trip.day} Day {data.trip.night} Nights
                         </p>
                       </div>
                       <div>
                         <p className="info-trip">Transportion</p>
-                        <p className="item-trip">{data.trip.transportation}</p>
+                        <p className="item-trip mt-2">{data.trip.transportation}</p>
                       </div>
                     </div>
                   </div>
@@ -158,24 +156,13 @@ function PaymentDate() {
                       <p className="data-table-total">:</p>
                     </td>
                     <td>
-                      <p className="data-table-total-p">IDR. {data.total}</p>
+                      <p className="data-table-total-p">IDR. {(data.total).toLocaleString()}</p>
                     </td>
                   </tr>
                 </tbody>
               </Table>
             </div>
           </div>
-          
-          // <Card className="m-4">
-          //   <Card.Header as="h5">Featured</Card.Header>
-          //   <Card.Body>
-          //     <Card.Title>Special title treatment</Card.Title>
-          //     <Card.Text>
-          //       With supporting text below as a natural lead-in to additional content.
-          //     </Card.Text>
-          //     <Button variant="primary">Go somewhere</Button>
-          //   </Card.Body>
-          // </Card>
         );
       })}
     </>

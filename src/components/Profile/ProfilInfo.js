@@ -35,7 +35,7 @@ function ProfileInfo() {
                 <img src={contact} alt="..."/>
               </div>
               <div style={{marginTop:"10px"}}>
-                <p style={{marginBottom:"0px", fontWeight:"800", fontSize:"14px"}}>{state.user.name}</p>
+                <p style={{marginBottom:"0px", fontWeight:"800", fontSize:"14px"}}>{state.user.fullname}</p>
                 <p style={{fontSize:"12px", color:"#8A8C90"}}>Full Name</p>
               </div>
             </div>

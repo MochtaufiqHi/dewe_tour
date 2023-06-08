@@ -7,7 +7,7 @@
   font-weight: 800;
   font-size: 14px;
   padding: 8px;
-  top: 10px;
+  top: 16px;
   border: white;
 }
 .card-body{
@@ -21,9 +21,12 @@
   font-weight: 900;
   font-size: 18px;
   color: #ffaf00;
+  margin-left: 10px;
 }
 .country{
   font-weight: 800;
   font-size: 18px;
   color: #878787;
+  margin-top: 24px;
+  margin-right: 10px;
 }

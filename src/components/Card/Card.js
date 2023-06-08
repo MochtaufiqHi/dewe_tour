@@ -31,9 +31,9 @@ import logo4 from '../../assets/img/perfomence4.png'
 function Card() {
   return (
     <>
-      <div className="d-flex justify-content-center cnt-card text-center">
+      <div className="d-flex justify-content-center cnt-card text-center w-100">
         {dataPerformence.map((data, index) => (
-          <div className="card m-3" style={{width:"210px"}} key={index}>
+          <div className="card m-3 shadow" style={{width:"210px"}} key={index}>
             <img src={data.logo} className="card-img-top w-25" alt="..."></img>
             <div className="card-body">
               <h5 className="card-title">{data.tittle}</h5>

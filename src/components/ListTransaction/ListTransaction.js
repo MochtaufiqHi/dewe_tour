@@ -12,6 +12,7 @@ function ListTransaction() {
 
   let { data: transactions } = useQuery("transactionCache", async () => {
     const response = await API.get("/transaction");
+    setTransaction(response.data.data)
     return response.data.data;
   });
 
@@ -29,6 +30,8 @@ function ListTransaction() {
 
   const showModal = () => setModalShow(true);
   const hideModal = () => setModalShow(false);
+
+  console.log(transaction)
 
   return (
     <>
@@ -72,7 +75,15 @@ function ListTransaction() {
                 <p className="text-colom">{data?.attachment}</p>
               </div> */}
                   <div className="col-2">
-                    <p className="text-colom">{data?.status}</p>
+                    <p className="text-colom rounded text-warning">{data?.status}
+                       {/* {data.status === "waiting approve" ? 
+                        (<p className="text-colom bg-warning rounded text-light">{data?.trip?.status}</p>) :
+                        (<p className="text-colom bg-success rounded text-light">{data?.trip?.status}</p> )
+                      }  */}
+                      {/* <button onClick={() => {
+                        console.log(data.status)
+                      }}>ini button</button> */}
+                    </p>
                   </div>
                   <div className="col-1 p-1">
                     <button 

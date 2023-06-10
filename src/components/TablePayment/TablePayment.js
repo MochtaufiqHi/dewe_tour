@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import plus from "../../assets/img/Plus.png";
 import minus from "../../assets/img/Minus.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -29,12 +29,12 @@ function TablePayment() {
   const [harga, setHarga] = useState(1);
 
   const addPrice = () => {
-    if(harga < trip?.quota) {
-      setHarga(harga + 1)
+    if (harga < trip?.quota) {
+      setHarga(harga + 1);
     } else {
-      Swal.fire('Orders exceed quota')
+      Swal.fire("Orders exceed quota");
     }
-  }
+  };
 
   let totalHarga = trip?.price * harga;
 
@@ -52,8 +52,8 @@ function TablePayment() {
 
       const config = {
         headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${localStorage.token}`,
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.token}`,
         },
       };
 
@@ -69,34 +69,53 @@ function TablePayment() {
 
       const response = await API.post("/transaction", body, config);
       console.log("transaction success : ", response);
-      navigate("/profile");
+
+      const token = response.data.data.token;
+      window.snap.pay(token, {
+        onSuccess: function (result) {
+          /* You may add your own implementation here */
+          console.log(result);
+          navigate("/profile");
+        },
+        onPending: function (result) {
+          /* You may add your own implementation here */
+          console.log(result);
+          navigate("/profile");
+        },
+        onError: function (result) {
+          /* You may add your own implementation here */
+          console.log(result);
+          navigate("/profile");
+        },
+        onClose: function () {
+          /* You may add your own implementation here */
+          alert("you closed the popup without finishing the payment");
+        },
+      });
+
+      // navigate("/profile");
     } catch (error) {
       console.log("transaction failed : ", error);
     }
   });
 
-  // const plusQuota = () => {
-  //   if (harga < trip?.quota) {
-  //     setHarga(harga + 1);
-  //   } else {
-  //     // alert("kuota tidak mencukupi")
-  //   }
-  // };
+  useEffect(() => {
+    //change this to the script source you want to load, for example this is snap.js sandbox env
+    const midtransScriptUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
+    //change this according to your client-key
+    const myMidtransClientKey = process.env.REACT_APP_MIDTRANS_CLIENT_KEY;
 
-  // const minQuota = () => {
-  //   if (harga > 1) {
-  //     setHarga(harga - 1);
-  //   }
-  // };
+    let scriptTag = document.createElement("script");
+    scriptTag.src = midtransScriptUrl;
+    // optional if you want to set script attribute
+    // for example snap.js have data-client-key attribute
+    scriptTag.setAttribute("data-client-key", myMidtransClientKey);
 
-  // const pengurangan = () => {
-  //   minPrice()
-  //   minQuota()
-  // }
-  // const pertambahan = () => {
-  //   addPrice()
-  //   // plusQuota()
-  // }
+    document.body.appendChild(scriptTag);
+    return () => {
+      document.body.removeChild(scriptTag);
+    };
+  }, []);
 
   return (
     <>
@@ -114,9 +133,7 @@ function TablePayment() {
             <button className="btn-border">
               <img
                 src={minus}
-                onClick={
-                  minPrice
-                }
+                onClick={minPrice}
                 className="icon-plus-minus px-3"
                 alt="..."
               />
@@ -125,9 +142,7 @@ function TablePayment() {
             <button className="btn-border">
               <img
                 src={plus}
-                onClick={
-                  addPrice
-                }
+                onClick={addPrice}
                 className="icon-plus-minus px-3"
                 alt="..."
               />

@@ -21,8 +21,6 @@ function InformationTrip() {
     return response?.data?.data;
   });
 
-  var IMG = "http://localhost:5000/uploads/" + trip?.image
-
   const [showModal, setShowModal] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
 
@@ -50,17 +48,17 @@ function InformationTrip() {
           <h4 style={{opacity:"50%"}}>{trip?.country?.name}</h4>
         </div>
         <div className='mb-2'>
-          <img src={IMG} alt="....." className='w-100'/>
+          <img src={trip?.image} alt="....." className='w-100'/>
         </div>
         <div className='d-flex'>
           <div className=''>
-            <img src={IMG} alt="....." className='w-100' onClick={() => handleOpenModal(0)}/>
+            <img src={trip?.image} alt="....." className='w-100' onClick={() => handleOpenModal(0)}/>
           </div>
           <div className='mx-2'>
-            <img src={IMG} alt="....." className='w-100' onClick={() => handleOpenModal(0)}/>
+            <img src={trip?.image} alt="....." className='w-100' onClick={() => handleOpenModal(0)}/>
           </div>
           <div className=''>
-            <img src={IMG} alt="....." className='w-100' onClick={() => handleOpenModal(0)}/>
+            <img src={trip?.image} alt="....." className='w-100' onClick={() => handleOpenModal(0)}/>
           </div>
         </div>
       </div>

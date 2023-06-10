@@ -1,7 +1,5 @@
 import React from "react";
 import './index.css'
-// import Form from 'react-bootstrap/Form'
-// import Button from 'react-bootstrap/Button'
 
 function Head() {
   return(

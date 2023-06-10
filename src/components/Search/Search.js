@@ -1,17 +1,42 @@
-import './index.css'
+import "./index.css";
+import { API } from "../../config/api";
+import { useQuery } from "react-query";
+import { useState } from "react";
 
 function Search() {
+  // const [search, setSearch] = useState({});
+
+  // let { data: countries } = useQuery("seacrhCoutryCache", async () => {
+  //   const response = await API.get("/country");
+  //   return response.data.data;
+  // });
+
+  // var finalArray = countries?.map((obj) => {
+  //   return obj.name
+  // })
+
+  // const itemList = [
+  //   finalArray
+  // ];
+
+  // const [filteredList, setFilteredList] = new useState(itemList);
+
+  // updatedList = updatedList.filter((item) => {
+  // return item.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+  // });
+  // setFilteredList(updatedList);
+
+  //  let { data: tripies } = useQuery("seacrhCoutryCache", async () => {
+  //   const response = await API.get("/trip");
+  //   return response.data.data;
+  // });
+
+
+  
+
   return (
     <>
-      <div className='container search'>
-        <div className='flex justify-content-end w-full label-form'>
-            <label>Find great places to holiday</label>
-          <div className='d-flex justify-content-center mt-2'>
-            <input className='form-control'/>
-            <button className='btn btn-warning text-white px-4'>Search</button>
-          </div>
-        </div>
-      </div>
+      
     </>
   );
 }

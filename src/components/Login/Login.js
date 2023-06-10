@@ -1,137 +1,136 @@
-import React, { useEffect, useState } from 'react';
-// import * as ReactDOM from 'react-dom';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
-// import DropdownProfile from '../Dropdown/Dropdown';
+import React, { useEffect, useState, useContext } from "react";
+import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
+import "./index.css";
+import Swal from 'sweetalert2'
+import { Alert } from "react-bootstrap";
 
-import palm from '../../assets/palm.png'
-import hibicus from '../../assets/hibiscus.png'
+import palm from "../../assets/img/palm.png";
+import hibicus from "../../assets/img/hibiscus.png";
+// import { useNavigate } from 'react-router-dom';
+import { UserContext } from "../../context/useContext";
+
+import { API, setAuthToken } from "../../config/api";
 
 function FormLogin(props) {
-  const [data, setData] = useState({
-    isAdmin: false,
-    isLogin: false,
-    user: {
-      email: '',
-      password: '',
+  let navigate = useNavigate();
+
+  const title = "Login";
+  document.title = "DueweToure | " + title;
+
+  const [_, dispatch] = useContext(UserContext);
+
+  const [message, setMessage] = useState(null);
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = form;
+
+  const handleOnChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleOnSubmit = useMutation(async (e) => {
+    try {
+      e.preventDefault();
+
+      //insert data for login
+      const response = await API.post("/login", form);
+
+      console.log("login success : ", response);
+
+      // send data to useContext
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        role: response.data.data.role,
+        payload: response.data.data,
+      });
+
+      setAuthToken(localStorage.token);
+
+      // status checks
+      if (response.data.data.role === "admin") {
+        navigate("/transaction");
+      } else {
+        navigate("/");
+      }
+      Swal.fire(
+        'Loggin Succes!',
+        '',
+        'success',
+        '3000'
+      )
+    } catch (error) {
+      Swal.fire(
+        'Loggin Failed!',
+        'Please check your email and password',
+        'error',
+        '3000'
+      )
+      console.log("Login failed : ", error);
     }
-  })
+  });
 
-  function handleOnChange(e) {
-    setData({
-      ...data,
-        user: {
-          [e.target.id]: e.target.value,
-        }
-    })
-  }
-
-  function handleOnSubmit(e) {
-    e.preventDefault()
-    const email = document.getElementById("email").value
-    const password = document.getElementById("password").value
-
-    // console.log(email)
-    // console.log(password)
-
-    if(email === "user@gmail.com" && password === "123") {
-      setData({
-        isAdmin: false,
-        isLogin: true,
-        user: {
-          email: email,
-          password: password,
-        }
-      })
-    } else if(email === "admin@gmail.com" && password === "123") {
-      setData({
-        isAdmin: true,
-        isLogin: false,
-        user: {
-          email: email,
-          password: password,
-        }
-      }) 
-    } else {
-      setData({
-        isAdmin: false,
-        isLogin: false,
-      })
-      alert("Account not found please try again")
-    }
-  }
-
-  useEffect(() => {
-    props.setIsLogin(data.isLogin)
-    props.setIsAdmin(data.isAdmin)
-  },[data])
-
-  const wrapperFunction = () => {
-    props.handleClose()
-    // setLogin()
-
-  }
-
-  console.log(data.isLogin)
-  console.log(data.isAdmin)
 
   return (
     <>
-      <Modal show={props.show} onHide={props.handleClose} style={{}} className="d-relative">
-        {/* <Modal.Header> */}
-        {/* <Modal.Header style={{width:"400px"}}> */}
-        {/* </Modal.Header> */}
-        <Modal.Title style={{margin:"51px auto"}}>Login</Modal.Title>
-        <Modal.Body style={{alignItems:"center", marginLeft:"20px"}}>
-          <Form onSubmit={handleOnSubmit}>
+      <Modal
+        show={props.show}
+        onHide={props.handleClose}
+        style={{}}
+        className="d-relative"
+      >
+        <Modal.Title className="modal-tittle">Login</Modal.Title>
+        <Modal.Body className="modal-body">
+          <Form onSubmit={(e) => handleOnSubmit.mutate(e)}>
             <Form.Group className="mb-3">
-            {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1"> */}
-              <Form.Label style={{margin:"2px 40px"}}>Email</Form.Label>
-              {/* <button onClick={()=> setLogin(10000)}>coba</button> */}
+              <Form.Label className="modal-label">Email</Form.Label>
               <Form.Control
-                style={{margin:"2px 40px", width:"350px"}}
-                id="email"
+                className="modal-control"
+                name="email"
                 type="email"
                 autoFocus
                 onChange={handleOnChange}
-                // value={data.email}
-                // onChange={(e) =>{setData({...data, user:{email: e.target.value}})}}
               />
             </Form.Group>
-            <Form.Group
-              className="mb-3"
-            >
-              <Form.Label style={{margin:"2px 40px"}}>Password</Form.Label>
-              <Form.Control 
-                style={{margin:"2px 40px", width:"350px"}}
-                id="password"
+            <Form.Group className="mb-3">
+              <Form.Label className="modal-label">Password</Form.Label>
+              <Form.Control
+                className="modal-control"
+                name="password"
                 type="password"
-                rows={3} 
+                rows={3}
                 onChange={handleOnChange}
-                // value={data.password}
-                // onChange={(e)=>{setData({...data, user:{password: e.target.value}})}}
               />
             </Form.Group>
-            {/* <Modal.Footer> */}
-              {/* <Button className="w-100" style={{backgroundColor:"orange", border:"none", color:"white"}} type="submit" onClick={() => {setLogin(); handleClose();}}>
-               */}
-              <Button className="" style={{backgroundColor:"orange", border:"none", color:"white", margin:"2px 40px", width:"350px"}} type="submit" onClick={wrapperFunction}> 
-                Login
-              </Button>
-              {/* <Button variant="primary" onClick={props.handleClose}>
-                Save Changes
+            <Button 
+              className="modal-btn" 
+              type="submit"
+              onClick={props.handleClose}
+            >
+              Login
+            </Button>
+            {/* <Button className="modal-btn"  onClick={() => Navi('/transaction')}> 
+                test
               </Button> */}
-            {/* </Modal.Footer> */}
           </Form>
-          <Form.Label className='m-5 text-center' style={{paddingLeft:"40px"}}>Don't have an account? ? <span>Click Here</span></Form.Label>
+          <Form.Label className="m-5 text-center modal-click">
+            Don't have an account? ? <span>Click Here</span>
+          </Form.Label>
         </Modal.Body>
-          <img src={palm} alt="..." style={{position:"absolute"}}/>
-          <img src={hibicus} alt="..." style={{position:"absolute", right:"0px"}}/>
+        <img src={palm} alt="..." className="modal-img" />
+        <img src={hibicus} alt="..." className="modal-img-hibi" />
       </Modal>
-      {/* <DropdownProfile isLogin={data.isLogin} setIsLoginFromChild={setIsLoginFromChild}/> */}
     </>
   );
 }
 
-export default FormLogin
+export default FormLogin;

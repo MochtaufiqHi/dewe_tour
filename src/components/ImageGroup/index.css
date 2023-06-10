@@ -2,6 +2,12 @@
   width: 33%;
   margin: 2px auto;
 }
-img{
-  /* width: 100%; */
+.trip-tittle{
+  font-weight: 900;
+  font-size: 48px;
+}
+.trip-country{
+  font-weight: 800;
+  font-size: 24px;
+  color: #a8a8a8;
 }

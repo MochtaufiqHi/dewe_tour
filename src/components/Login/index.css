@@ -1,0 +1,29 @@
+.modal-tittle{
+  margin: 51px auto;
+}
+.modal-img, .modal-img-hibi{
+  position: absolute;
+}
+.modal-img-hibi{
+  right: 0px;
+}
+.modal-btn{
+  background-color: orange;
+  border: none;
+  color: white;
+  margin: 2px 40px;
+  width: 350px;
+}
+.modal-click{
+  padding-left: 40px;
+}
+.modal-label, .modal-control{
+ margin: 2px 40px; 
+}
+.modal-control{
+  width: 350px;
+}
+.modal-body{
+  align-items: center;
+  margin-left: 20px;
+}

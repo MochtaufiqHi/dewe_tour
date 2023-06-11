@@ -1,5 +1,4 @@
 import Head from "../components/Head/Head";
-// import Search from "../components/Search/Search";
 import Card from "../components/Card/Card";
 import Item from "../components/Item/Item";
 import logo from "../assets/img/hero.png";

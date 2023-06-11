@@ -149,21 +149,21 @@ function InformationTrip() {
             <Carousel activeIndex={activeIndex} onSelect={handleCarouselSelect}>
               <Carousel.Item>
                 <img
-                  src={IMG}
+                  src={trip?.image}
                   alt="Image 1"
                   style={{ width: "100%", height: "100%" }}
                 />
               </Carousel.Item>
               <Carousel.Item>
                 <img
-                  src={IMG}
+                  src={trip?.image}
                   alt="Image 2"
                   style={{ width: "100%", height: "100%" }}
                 />
               </Carousel.Item>
               <Carousel.Item>
                 <img
-                  src={IMG}
+                  src={trip?.image}
                   alt="Image 3"
                   style={{ width: "100%", height: "100%" }}
                 />

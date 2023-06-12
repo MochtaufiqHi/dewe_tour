@@ -8,22 +8,6 @@ import des6 from './assets/img/des6.png'
 export const trip = [
   {
     tittle: "6D/4N Fun Tassie Vacation " ,
-    country: "Kuningan",
-    acomodation: "Hotel 4 Nights",
-    transportation: "Qatar Airways",
-    eat: "Including as Iternity",
-    duration: {
-      day: 6,
-      night: 4,
-    },
-    date: "26/08/2023",
-    price: 1233800,
-    quota: 2,
-    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    img: [des1, des2, des3],
-  },
-  {
-    tittle: "6D/4N Fun Tassie Vacation " ,
     country: "Japan",
     acomodation: "Hotel 4 Nights",
     transportation: "Qatar Airways",
